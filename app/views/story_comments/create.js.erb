@@ -1,0 +1,9 @@
+$('#loading').show()
+$('#story-comment-lists').html("<%= j(render partial: '/story_comments/comments', locals:{story_comments: @story_comments}) %>");
+$('#comment-flash').html("<%= j(render partial: '/layouts/flash', locals:{flash: flash}) %>");
+$('#comment-post-field').html("<%= j(render partial: 'layouts/post_comment', locals:{parent: @story, parent_comment: @story_comment}) %>");
+$('#loading').hide()
+$(function(){
+  setTimeout(function(){
+  $('#flash').fadeOut()}, 3000)
+});

@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="row">
+
+    <div id="content-left" class="content-area col-md-6 col-xs-12">
+      <div id="main-content" class ="content-box">
+        <h2 class="content-box-head">
+          <%= @story.title %>
+        </h2>
+        <div class="content-box-body">
+          <div class="story-header clearfix">
+            <p>
+              作成者： <span class="font-bold"><%= link_to @story.user.name, user_path(@story.user) %></span> / リソース：<%= link_to @story.article.title, article_path(@story.article) %>
+            </p>
+            <% unless same_user_or_admin?(@story.user) %>
+            <!-- 作成者自身・管理者でない場合に「ライブラリ登録」表示 -->
+              <div id="library-btn-<%= @story.id %>" class="story-edit-library">
+                <!-- ライブラリ登録 -->
+                <%= render partial: '/libraries/library', locals:{story: @story} %>
+              </div>
+            <% end %>
+          </div>
+          <p>
+            <% @story.categories.each do |category| %>
+              <%= link_to category.name, category_path(category), class:'category-tag' %>
+            <% end %>
+          </p>
+          <% @topics.each do |topic| %>
+            <h4 class="story-topic-title"><%= topic.title %></h4>
+            <% topic.story_bodies.each do |body| %>
+              <div class="story-body-area">
+                <% if body.text_type == 1 %>
+                <!-- text_type:1 コード用のレイアウト使用 -->
+                  <div class="code">
+                    <pre>
+                      <%= simple_format(body.content) %>
+                    </pre>
+                  </div>
+                <% else %>
+                <!-- text_type:0 通常レイアウト使用 -->
+                  <%= simple_format(body.content) %>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <% if user_signed_in? %>
+          <div class="content-box-foot">
+            <% if same_user_or_admin?(@story.user) %>
+              <%= link_to(edit_story_path(@story)) do %>
+              <div class="btn btn-half">ストーリーの編集</div>
+              <% end %>
+            <% end %>
+            <div id="sub-content-show" class="btn btn-sub2 btn-half">
+              コメント(<%= @story.story_comments.count %>)
+            </div>
+          </div>
+        <% else %>
+        <div class="content-box-foot">
+          <p class="foot-not-active">
+            会員登録・ログインすると、ストーリーをマイライブラリに追加したり、トークに参加することができます。
+          </p>
+        </div>
+        <% end %>
+      </div>
+
+      <div id="sub-content" class="content-box">
+        <h2 class ="content-box-head">コメント</h2>
+        <div class="content-box-body">
+          <div id="sub-content-hide" class="btn btn-sub2">ストーリに戻る</div>
+          <div id="story-comment-lists" >
+            <%= render partial: '/story_comments/comments', locals:{story_comments: @story_comments, admin_comment_page: @admin_comment_page} %>
+          </div>
+        </div>
+        <div class="content-box-foot">
+          <div id="comment-flash">
+            <%= render partial: '/layouts/flash', locals:{flash: flash} %>
+          </div>
+          <div id="comment-post-field">
+            <%= render partial: 'layouts/post_comment', locals:{parent: @story, parent_comment: @story_comment} %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="content-right" class="content-area col-md-6 col-xs-12">
+      <div class ="content-box">
+        <h2 class ="content-box-head">関連ストーリー</h2>
+        <div class="content-box-body story-lists">
+          <%= render '/stories/story_lists_wrapper', stories: @stories %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

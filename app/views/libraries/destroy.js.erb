@@ -1,0 +1,2 @@
+$('#library-btn-<%= @story.id %>').html("<%= j(render partial: '/libraries/library', locals:{story: @story}) %>");
+$('#library-count-<%= @story.id %>').html("<%= j(render partial: '/libraries/count', locals:{story: @story}) %>");

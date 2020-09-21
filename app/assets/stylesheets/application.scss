@@ -1,0 +1,843 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require jquery.tagit
+ *= require tagit.ui-zendesk
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+$header-height: 60px;
+$footer-height: 20px;
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  font-family: 游ゴシック体, 'Yu Gothic', YuGothic, 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+;
+}
+
+input[type="text"], textarea{
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-bottom: solid 1px #A4A4A4;
+  border-radius: 0;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+textarea{
+  border: solid 1px #A4A4A4;
+}
+
+html, body {
+  height: 100%;
+  color: #576B6F;
+  background-color: #F7F1F1;
+}
+
+a{
+  color: #3F7CAC;
+  &:hover{
+    color: #BDBDBD;
+  }
+}
+
+li{
+  list-style: none;
+}
+
+pre{
+  padding: 0;
+  background-color: #0B614B;
+  margin: 0;
+}
+
+pre > p{
+  margin: 10px;
+  color: #F7F2E0;;
+  line-height: 1.8;
+  overflow: scroll;
+}
+
+input{
+  border-radius: 0;
+  &:focus{
+    border: solid 2px #F7D358;
+  }
+}
+
+/* Tag-itヘルプメッセージ非表示 */
+
+.ui-helper-hidden-accessible {
+  display: none;
+}
+
+/* JS・Ajax関連レイアウト */
+
+#user-menu > ul{
+  position: relative;
+}
+
+#user-menu-topics{
+  display: none;
+  width: 175%;
+  position: absolute;
+  left: -45px;
+  border: solid 1px #A4A4A4;
+  padding: 10px;
+  background-color: white;
+  z-index: 9;
+}
+
+#user-menu-topics > li{
+  margin: 5px;
+  border-bottom: solid 1px #A4A4A4;
+  &:hover{
+    background-color: #DDDEDF;
+  }
+  &:last-child{
+    border-bottom: none;
+  }
+}
+
+#more-article-link, #more-story-link, #more-stock-link{
+  padding: 0;
+  margin :5px auto;
+  width :100%;
+  font-size: 16px;
+  color: #6E6E6E;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+}
+
+
+#sub-content{
+  position: relative;
+  display: none;
+}
+
+
+#sub-content-show, #sub-content-hide{
+  &:hover {
+    cursor: pointer;
+    color: white;
+  }
+}
+
+#switch-box, #switch-left, #switch-right{
+  display: none;
+}
+
+#switch-box{
+  width: 100%;
+}
+
+#switch-left, #switch-right{
+  margin-top: 6px;
+  &:hover{
+    text-decoration: underline;
+    color: #BDBDBD;
+  }
+}
+
+#switch-left{
+  float: left;
+  padding-left:10px;
+}
+
+#switch-right{
+  float: right;
+  padding-right: 10px;
+}
+
+
+/* ヘッダーメニュー関係 */
+
+header{
+  margin: 0 auto;
+  height: $header-height;
+  padding: 5px 30px;
+  margin-bottom: 20px;
+  background-color: #5C584B;
+  color: #FBF9F8;
+}
+
+.header-logo{
+  width: 180px;
+  float: left;
+  margin: 0;
+}
+
+.header-logo-image{
+  width: 100%;
+  height: auto;
+  line-height: 50px;
+}
+
+.header-search{
+  float: left;
+  margin: 10px;
+  width: 25%;
+}
+
+.header-search-form, .header-search-form-area{
+  width: 100%;
+}
+
+.header-search-form{
+  position: relative;
+}
+
+.header-search-form-textfield{
+  font-size: 20px;
+  height: 30px;
+  width: 100%;
+  float: left;
+  background-color: #5C584B;
+  color: #FBF9F8;
+}
+
+.header-search-form-btn{
+  width: 30px;
+  height: 30px;
+  float: left;
+  background: none;
+  border: none;
+  color: #FBF9F8;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.footer-search{
+  display: none;
+}
+
+.header-nav{
+  float: right;
+}
+
+.header-nav-list{
+  float: left;
+  margin-right: 30px;
+}
+
+
+.header-nav-list:last-child{
+  margin-right: 0;
+}
+
+.header-nav-text{
+  float:left;
+  color: #FBF9F8;
+  font-size: 16px;
+  line-height: 50px;
+  margin-bottom: 0;
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
+.clearfix::after{
+  content: "";
+  clear: both;
+  display: block;
+}
+
+/* フッター */
+footer{
+  width: 100%;
+  height: $footer-height;
+  text-align: center;
+  color: #FBF9F8;
+  background-color: #5C584B;
+  position: fixed;
+  bottom: 0;
+}
+
+/* コンテンツエリア関係 */
+.container{
+  height: calc(100% - 140px);
+}
+
+.row, .content-area{
+  height: 100%;
+}
+
+
+.content-area{
+  padding: 0 10px;
+}
+
+.content-box{
+  height: 100%;
+  width: 100%;
+  border: solid 1px #D8D8D8;
+  overflow: scroll;
+  position: relative;
+  background-color: #FBF9F8;
+}
+
+.content-box-head{
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  background-color: #DDCF94;
+  color: #424242;
+  font-weight: bold;
+  font-size: 24px;
+  margin: 0;
+  padding: 10px;
+}
+
+.content-box-body{
+  padding: 20px;
+  margin: 44px auto 0 auto;
+  overflow: scroll;
+}
+
+.content-box-foot{
+  background-color: white;
+  position: absolute;
+  padding: 20px;
+  bottom: 0px;
+  width: 100%;
+  margin: 0 auto;
+  border-top: solid 1px #D8D8D8;
+}
+
+.foot-left{
+  float: left;
+  padding: 6px;
+  margin: 0 5px;
+}
+.foot-right{
+  float: right;
+  padding: 6px;
+}
+
+/* テキストエリア関係 */
+
+.title-field{
+  width: 100%;
+}
+
+.body-textarea{
+  width: 100%;
+  height: 240px;
+  resize: none;
+}
+
+.body-textarea-mini{
+  width: 100%;
+  height: 180px;
+  resize: none;
+}
+
+.foot-textarea{
+  width: 75%;
+  height: 60px;
+  float: left;
+  resize: none;
+}
+
+.foot-not-active{
+  color: #A4A4A4;
+}
+
+/* content-box内の検索フォーム */
+.content-box-search{
+  float: left;
+  margin: 10px;
+  width: 90%;
+}
+
+.content-box-search-form, .content-box--search-form-area{
+  width: 100%;
+}
+
+.content-box-search-form{
+  position: relative;
+}
+
+.content-box-search-form-textfield{
+  font-size: 20px;
+  height: 30px;
+  width: 100%;
+  float: left;
+  background-color: white;
+  color: #5C584B;
+}
+
+.content-box-search-form-btn{
+  width: 30px;
+  height: 30px;
+  float: left;
+  background: none;
+  border: none;
+  color: #5C584B;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+
+
+/* リスト関係 */
+
+.content-list{
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  border-bottom: solid 1px #BDBDBD;
+}
+
+.comment-list{
+  width: 100%;
+  padding: 10px;
+  border-bottom: solid 1px #BDBDBD;
+}
+
+.content-list:hover, .comment-list:hover{
+  background-color: #F5F3F5;
+}
+
+.content-list:last-child, .comment-list:last-child{
+  width: 100%;
+  border-bottom: none;
+}
+
+/* ボタン関係 */
+
+
+.btn{
+  height: 36px;
+  background-color: #234645;
+  border-radius: 0;
+  line-height: 22px;
+}
+
+.btn, .btn > a{
+  color: white;
+  background-color: #5C584B;
+  &:hover{
+    background-color: #88857C;
+    color: white;
+  }
+}
+
+.btn-sub, .btn-sub > a{
+  background-color: #457259;
+  color: white;
+  &:hover{
+    background-color: #88A595;
+  }
+}
+
+.btn-sub2, .btn-sub2 > a{
+  background-color: #A39149;
+  color: white;
+  &:hover{
+    background-color: #9E8868;
+  }
+}
+
+.btn-wide{
+  width: 90%;
+  float: none;
+  margin: 5px auto;
+}
+
+.btn-half{
+  width: 40%;
+  float: left;
+  margin: 5px 5%;
+}
+
+.btn-danger{
+  background-color: red;
+  border-color: #8A0808;
+  &:hover{
+    background-color: #8A0808;
+  }
+}
+
+.btn-add{
+  background-color: #A9D0F5;
+  color: #576B6F;
+  margin: 5px;
+}
+
+.btn-add:hover{
+  background-color: #A7C3D9;
+}
+
+.btn-remove{
+  background-color: #FC9F94;
+  margin: 5px;
+  color: #585858;
+}
+
+.btn-remove:hover{
+  background-color: #FDD3CE;
+}
+
+.btn-comment-submit{
+  float: left;
+  height: 60px;
+  width: 20%;
+  margin-left: 5px;
+}
+
+.btn-image{
+  width: 14px;
+  height: 14px;
+}
+
+
+/* レイアウト指定 */
+.position-center{
+  text-align: center;
+}
+
+.font-bold{
+  font-weight: bold;
+}
+
+.margin-expand > h3, .margin-expand > h4{
+  margin: 36px;
+}
+
+.margin-expand > p{
+  line-height: 1.8;
+}
+
+
+/* 特殊リンク */
+
+.category-tag{
+  padding: 3px;
+  border-radius: 6px;
+  border: 1px solid #CAD8F3;
+  background: none;
+  background-color: #DEE7F8;
+  font-weight: normal;
+}
+
+/* フラッシュメッセージ */
+
+#flash{
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 5px;
+  padding: 0;
+  line-height: 48px;
+  height: 48px;
+  position: absolute;
+  float: left;
+  color: white;
+  text-align: center;
+  z-index: 10;
+  opacity: 0.8;
+}
+
+#comment-flash{
+  position: relative;
+  width: 100%;
+}
+
+#comment-flash > #flash{
+  position: absolute;
+  top: -60px;
+  width: 100%;
+}
+
+.success, .notice{
+  background-color: #58ACFA;
+}
+
+.alert {
+  background-color: red;
+  color: white;
+  opacity: 0.8;
+}
+
+
+/* レスポンシブ(スマートフォンサイズ) */
+
+.display-pc{
+  display: block;
+}
+
+.display-tab{
+  display: none;
+}
+
+.display-mobile{
+  display: none;
+}
+
+@media screen and (max-width:991px){
+  #content-right{
+    display: none;
+  }
+
+  #switch-box, #switch-left, #switch-right{
+    display: block;
+  }
+}
+
+@media screen and (max-width:768px){
+  .container{
+    height: calc(100% - 180px);
+  }
+
+  .display-pc{
+    display: none;
+  }
+
+  .display-tab{
+    display: block;
+  }
+
+  .header-search{
+    display: none;
+  }
+
+  .footer-search-form-textfield, .footer-search-form-btn, .footer-search-form-icon{
+    display: inline-block;
+  }
+
+  footer{
+    height: 60px;
+  }
+
+  .footer-search{
+    display: block;
+    width: 90%;
+    margin: 6px auto 0 auto;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+
+  .footer-search-form, .footer-search-form-area{
+    width: 100%;
+    height: 30px;
+  }
+
+  .footer-search-form{
+    position: relative;
+  }
+
+
+  .footer-search-form-textfield{
+    font-size: 16px;
+    height: 30px;
+    width: 100%;
+    border: solid 1px #FBF9F8;
+    background-color: #5C584B;
+    color: #FBF9F8;
+  }
+
+  .footer-search-form-btn{
+    width: 29px;
+    height: 29px;
+    background: none;
+    border: none;
+    color: #FBF9F8;
+    float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .footer-search-form-icon{
+    font-size: 15px;
+  }
+}
+
+
+
+@media screen and (max-width:580px){
+  p:last-child{
+    margin-bottom: 0;
+  }
+
+  header{
+    text-align: center;
+    height: auto;
+    margin-bottom: 14px;
+  }
+
+  footer{
+    height: 50px;
+  }
+
+  .header-logo, .header-search, .header-nav{
+    float: none;
+  }
+
+  .header-logo{
+    width: 200px;
+    margin: 0 auto;
+  }
+
+  .header-logo-image{
+    width: 100%;
+    height: auto;
+  }
+
+  .header-nav-list{
+    float: none;
+    display: inline-block;
+    margin-right: 10px;
+    text-align: center;
+  }
+
+  .header-nav-icon{
+    float: left;
+    width: 16px;
+    height: 16px;
+    margin: 0 4px;
+  }
+
+  .header-nav-text{
+    float:left;
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 0;
+    margin-right: 10px;
+  }
+
+  .footer-search-form, .footer-search-form-area{
+    width: 100%;
+    height: 20px;
+  }
+
+  .footer-search-form{
+    height: 20px;
+    line-height: 20px;
+  }
+
+  .footer-search-form-textfield{
+    font-size: 16px;
+    height: 20px;
+    float: none;
+    border: solid 1px #FBF9F8;
+    background-color: #5C584B;
+    color: #FBF9F8;
+  }
+
+  .footer-search-form-btn{
+    font-size: 15px;
+    line-height: 15px;
+    width: 18px;
+    height: 18px;
+    float: none;
+    color: #FBF9F8;
+  }
+
+}
+
+@media screen and (max-width:425px){
+  *{
+    font-size: 11px;
+  }
+
+  .display-tab{
+    display: none;
+  }
+
+  .display-mobile{
+    display: block;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  h2{
+    font-size: 12px;
+  }
+
+  h3{
+    font-size: 14px;
+  }
+
+  h4{
+    font-size: 12px;
+  }
+
+  .content-area{
+    padding: 0;
+  }
+
+  .content-box-head{
+    font-size: 16px;
+    padding: 4px;
+  }
+
+  .content-box-body{
+    margin: 25px auto 0 auto;
+    padding: 8px;
+  }
+
+  .content-box-foot{
+    padding: 8px;
+  }
+
+  .content-list, .comment-list{
+    padding: 0;
+  }
+
+  .footer-search-form-btn{
+    font-size: 16px;
+  }
+
+  .header-nav-text{
+    margin-right: 0;
+  }
+
+  .row, .content-area, .content-box{
+    height: 100%;
+  }
+
+  .margin-expand > h3, .margin-expand > h4{
+    margin: 16px;
+  }
+
+  .margin-expand > p{
+    line-height: 1.4;
+  }
+
+  .margin-expand > h3, .margin-expand > h4{
+    margin: 12px;
+  }
+
+  .btn{
+    font-size: 11px;
+    height: 19px;
+    padding: 3px;
+    line-height: 11px;
+  }
+
+}

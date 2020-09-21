@@ -1,0 +1,10 @@
+<% libraries.each do |library| %>
+<% stock = library.story %>
+<div class="content-list clearfix">
+  <h4><%= link_to stock.title, story_path(stock) %> / <%= link_to stock.user.name, user_path(stock.user) %></h4>
+  <p>
+    <%= daytime_localize(stock.created_at) %>/
+    ライブラリ登録数：<%= stock.libraries.count %>
+  </p>
+</div>
+<% end %>

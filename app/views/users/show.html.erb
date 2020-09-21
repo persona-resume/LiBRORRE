@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="row">
+
+    <div id="content-left" class="content-area col-md-6 col-xs-12">
+      <div id="main-content" class ="content-box">
+        <h2 class="content-box-head user-info">利用者情報</h2>
+        <div class="content-box-body user-info">
+          <div>
+            <%= attachment_image_tag @user, :image, :fill, 200, 200, fallback:"/images/no_image.png", size: '200' %>
+          </div>
+          <h3><%= @user.name %></h3>
+          <!-- 利用者本人か、管理者のみメールアドレス表示 -->
+          <% if same_user_or_admin?(@user) %>
+            <p><%= @user.email %></p>
+          <% end %>
+          <p>ライブラリ保存数：<%= @libraries %></p>
+          <p><%= simple_format(@user.caption) %></p>
+        </div>
+
+        <!-- 利用者本人か、管理者のみ編集ボタン表示 -->
+        <% if same_user_or_admin?(@user) %>
+          <div class="content-box-foot position-center">
+            <% if current_user.admin == true %>
+              <div id="sub-content-show" class="btn btn-half">利用者情報の編集</div>
+              <%= link_to(admin_user_path(@user)) do %>
+                <div class="btn btn-half">利用者のコメント一覧</div>
+              <% end %>
+            <% else %>
+              <div id="sub-content-show" class="btn btn-wide">利用者情報の編集</div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <% if same_user_or_admin?(@user) %>
+      <!-- 編集ボタンクリック時に表示 -->
+        <div id="sub-content" class ="content-box">
+          <h2 class ="content-box-head user-edit">利用者情報の編集</h2>
+          <%= form_for(@user) do |f| %>
+            <div class="content-box-body">
+              <h3><%= f.text_field :name, placeholder:"変更後の名前" %></h3>
+              <p><%= f.text_field :email, placeholder:"変更後のメールアドレス" %></p>
+              <p><%= f.text_area :caption, placeholder:"自己紹介", class: 'body-textarea-mini' %></p>
+              <p>プロフィール画像：</p>
+              <p><%= f.attachment_field :image %></p>
+              <% if @user.deleted_user == false %>
+                <%= link_to "利用者情報の削除", unsubscribe_user_path(@user), method: :patch, class:"btn btn-danger",data: { confirm: '削除後はログインできなくなります。本当に削除してもよろしいですか？' } %>
+              <% end %>
+            </div>
+            <div class="content-box-foot position-center">
+              <%= f.submit "更新", class:"btn btn-half" %>
+              <span id="sub-content-hide" class="btn btn-half">更新のキャンセル</span>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div id="content-right" class="content-area col-md-6 col-xs-12">
+      <div class ="content-box">
+          <!-- ログイン時と未ログイン時で表示を分ける -->
+          <% if user_signed_in? %>
+            <!-- 自分自身の情報を閲覧している場合、最近閲覧したストーリーを表示 -->
+            <% if @user == current_user %>
+              <h2 class ="content-box-head user-history">最近閲覧したストーリー</h2>
+              <div class="content-box-body user-history">
+                <% @visiteds.each do |visited| %>
+                  <div class="content-list clearfix">
+                    <h4><%= link_to visited.story.title, story_path(visited.story) %> / <%= link_to visited.story.user.name, user_path(visited.story.user) %></h4>
+                    <p>
+                      <%= daytime_localize(visited.story.created_at) %>/
+                      ライブラリ登録数：<%= visited.story.libraries.count %>
+                    </p>
+                  </div>
+                <% end %>
+              </div>
+            <!-- 他人の情報を閲覧している場合、表示ユーザーが作成したストーリーを表示 -->
+            <% else %>
+              <h2 class ="content-box-head user-history">作成したストーリー</h2>
+              <div id="stories" class="content-box-body user-history">
+                <%= render '/stories/story_lists_wrapper', stories: @stories %>
+              </div>
+            <% end %>
+          <!-- 未ログイン時、表示ユーザーが作成したストーリーを表示 -->
+          <% else %>
+            <h2 class ="content-box-head user-history">作成したストーリー</h2>
+            <div class="content-box-body user-history">
+              <%= render '/stories/story_lists_wrapper', stories: @stories %>
+            </div>
+          <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>

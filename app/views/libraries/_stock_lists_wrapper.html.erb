@@ -1,0 +1,8 @@
+<div id="stock">
+  <%= render partial: 'stock_list', locals:{libraries: libraries} %>
+</div>
+<% if @libraries.next_page %>
+  <div id="more-story-link">
+    <%= link_to_next_page libraries, 'さらに10件表示', params: { type: :stock }, remote: true, id:"more-stocks" %>
+  </div>
+<% end %>

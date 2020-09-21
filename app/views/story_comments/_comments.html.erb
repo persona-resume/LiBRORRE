@@ -1,0 +1,37 @@
+<% if story_comments.count == 0 %>
+  <div class="content-list clearfix">
+    <p>まだ投稿はありません。</p>
+  </div>
+<% else %>
+  <% story_comments.each do |comment| %>
+    <% if comment.user.deleted_user == false %>
+      <div class="comment-list clearfix">
+        <%= attachment_image_tag comment.user, :image, :fill, 64, 64, class: 'comment-user-thumb' %>
+        <div class="comment-user-text">
+          <p class="comment-user-name">
+          <% if comment.user.admin == true %>
+            <%= comment.user.name %>
+          <% else %>
+            <%= link_to comment.user.name, user_path(comment.user) %>
+          <% end %>
+          </p>
+          <p><%= simple_format(comment.comment) %></p>
+          <p><%= daytime_localize(comment.updated_at) %>
+            <% if @admin_comment_page %>
+              <span>
+                / <%= link_to "削除", admin_destroies_story_comment_path(comment), method: :delete, remote: true, data: { confirm: '削除してもよろしいですか？' } %>
+              </span>
+            <% elsif same_user_or_admin?(comment.user) %>
+              <span>
+                / <%= link_to "削除", story_comment_path(comment), method: :delete, remote: true, data: { confirm: '削除してもよろしいですか？' } %>
+              </span>
+            <% end %>
+           </p>
+           <% if admin? %>
+              <p>(リソース：<%= link_to comment.story.title, story_path(comment.story) %>)</p>
+            <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

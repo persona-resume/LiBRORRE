@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="row">
+
+    <div id="content-left" class="content-area col-md-6 col-xs-12">
+      <div id="main-content" class ="content-box">
+        <h2 class="content-box-head"><%= @article.title %></h2>
+        <div class="content-box-body">
+          <p>タグ：
+            <% @article.categories.each do |category| %>
+              <%= link_to category.name, category_path(category), class: 'category-tag' %>
+            <% end %>
+          </p>
+          <h4>● 意味</h4>
+          <div class="article-body-area">
+            <%= simple_format(@article.mean) %>
+          </div>
+          <h4>● 主な原因</h4>
+          <div class="article-body-area">
+            <%= simple_format(@article.cause) %>
+          </div>
+        </div>
+        <div class="content-box-foot">
+          <% if user_signed_in? %>
+          <div class="clearfix">
+            <%= link_to "エラー情報の編集", edit_article_path(@article), class:"btn btn-half" %>
+            <div id="sub-content-show" class="btn btn-sub2 btn-half">ディスカッション</div>
+          </div>
+          <% end %>
+          <% if admin? %>
+          <!-- 管理者ログイン時 -->
+          <p>
+            最終更新：<%= link_to daytime_localize(@article.updated_at), article_histories_path %>
+          </p>
+          <% else %>
+          <!-- 利用者ログイン時 -->
+          <p>
+            最終更新：<%= daytime_localize(@article.updated_at) %>
+          </p>
+          <% end %>
+        </div>
+      </div>
+
+      <div id="sub-content" class ="content-box">
+        <h2 class ="content-box-head">ディスカッション</h2>
+        <div class="content-box-body">
+          <p id="sub-content-hide" class="btn btn-sub2">ディスカッションを終了する</p>
+          <div id="article-comment-lists">
+            <%= render partial: '/article_comments/comments', locals:{article_comments: @article_comments, admin_comment_page: @admin_comment_page} %>
+          </div>
+        </div>
+        <div class="content-box-foot">
+          <div id="comment-flash">
+            <%= render partial: '/layouts/flash', locals:{flash: flash} %>
+          </div>
+          <div id="comment-post-field">
+            <%= render partial: 'layouts/post_comment', locals:{parent: @article, parent_comment: @article_comment} %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="content-right" class="content-area col-md-6 col-xs-12">
+      <div class ="content-box">
+        <h2 class ="content-box-head">関連ストーリー</h2>
+        <div class="content-box-body">
+          <%= render '/stories/story_lists_wrapper', stories: @stories %>
+        </div>
+        <div class="content-box-foot">
+          <% if user_signed_in? %>
+            <div>
+              <%= link_to 'ストーリーの作成', new_article_stories_path(@article), class:'btn' %>
+            </div>
+          <% else %>
+            <p class="foot-not-active">
+              ストーリーの作成(ログイン時のみ)
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

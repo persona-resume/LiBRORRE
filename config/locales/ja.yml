@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    attributes:
+      article:
+        title: タイトル
+        mean: 意味
+        cause: 原因
+        content: 本文
+      story:
+        title: ストーリー名
+      story/story_topics:
+        title: 見出し
+      story/story_topics/story_bodies:
+          content: 本文

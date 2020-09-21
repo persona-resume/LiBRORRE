@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div id="content-left" class="content-area col-md-12 col-xs-12">
+      <div class ="content-box">
+        <h2 class="content-box-head">ユーザー一覧</h2>
+        <div class="content-box-body">
+          <%= form_tag(users_path, method: :get, class: 'content-box-search-form-area') do %>
+            <div class="content-box-search-form">
+              <%= text_field_tag :search, '', class: 'content-box-search-form-textfield', placeholder:'キーワードを入力してください' %>
+              <%= button_tag(type: 'submit', class: 'content-box-search-form-btn') do %>
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+              <% end %>
+            </div>
+          <% end %>
+          <table class="table">
+            <tr>
+              <th></th>
+              <th>利用者名</th>
+              <th>登録日</th>
+            </tr>
+            <% @users.each do |user| %>
+              <tr>
+                <td>
+                  <% if user.deleted_user == true %>
+                    <span class="btn-danger">退会済</span>
+                  <% end %>
+                </td>
+                <td><%= link_to user.name, user_path(user)%></td>
+                <td><%= daytime_localize(user.created_at) %></td>
+              </tr>
+            <% end %>
+          </table>
+          <div class="content-box-foot">
+            <%= paginate @users %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

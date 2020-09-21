@@ -1,0 +1,3 @@
+$('#more-stories').remove();
+$('#stories').append("<%= j render partial: '/stories/story_list', locals:{stories: @stories} %>");
+$('#more-story-link').append("<%= j link_to_next_page @stories, 'さらに10件表示', params: { type: :story }, remote: true, id: 'more-stories' %>");

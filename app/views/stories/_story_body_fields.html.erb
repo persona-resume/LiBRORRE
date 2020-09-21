@@ -1,0 +1,6 @@
+<div class="nested-fields story-body-area">
+  <%= f.radio_button :text_type, 0, checked: true %>文章
+  <%= f.radio_button :text_type, 1 %>コード
+  <%= link_to_remove_association '本文・コードの削除',f, class: "btn btn-remove" %>
+  <%= f.text_area :content, class: "body-textarea" %>
+</div>

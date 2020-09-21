@@ -1,0 +1,4 @@
+$('#more-articles').remove();
+$('#articles').append("<%= j render partial: '/articles/article_list', locals:{articles: @articles} %>");
+$('#more-article-link').append("<%= j link_to_next_page @articles, 'さらに10件表示', params: { type: :article }, remote: true, id: 'more-articles' %>");
+

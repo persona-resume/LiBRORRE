@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div id="content-left" class="content-area col-md-12 col-xs-12">
+      <div class ="content-box">
+        <h2 class="content-box-head">項目の編集</h2>
+        <%= form_for(@article) do |f| %>
+          <div class="content-box-body">
+            <%= render '/layouts/validation_error', model: f.object %>
+            <h5>エラー名：
+            <%= f.text_field :title, placeholder: "エラー名を入力", class:'title-field' %></h5>
+            <div class="tag-list">
+              タグ：
+                <ul id="article-tags">
+                </ul>
+                <%= hidden_field_tag :category_hidden,@category_list %>
+            </div>
+            <h5>- 意味</h5>
+            <%= f.text_area :mean, class:"body-textarea" %>
+            <h5>- 原因</h5>
+            <%= f.text_area :cause, class:"body-textarea" %>
+            <% if admin? %>
+              <%= link_to "エラー情報の削除", article_path(@article), method: :delete, data:{confirm: "削除は十分なディスカッションを行ってから実行してください。本当に削除しますか？"}, class:"btn btn-danger" %>
+            <% end %>
+          </div>
+          <div class="content-box-foot">
+            <%= link_to "戻る", article_path(@article), class: "btn btn-half btn-sub2" %>
+            <%= f.submit "保存", class: "btn btn-half btn-sub" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

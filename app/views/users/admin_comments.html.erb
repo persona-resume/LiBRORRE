@@ -1,0 +1,36 @@
+<div class="container" >
+  <div class="row">
+     <div id="content-left" class="content-area col-md-12">
+      <div class ="content-box">
+        <h2 class="content-box-head">ディスカッション/トーク</h2>
+        <div class="content-box-body col-md-6 col-xs-6">
+          <h4>- ディスカッション一覧</h4>
+          <div id="article-comment-lists" class="user-admin-comments">
+            <%= render partial: '/article_comments/comments', locals:{article_comments: @article_comments, admin_comment_page: @admin_comment_page} %>
+          </div>
+        </div>
+
+        <div class="content-box-body col-md-6 col-xs-6">
+          <h4>- トーク一覧</h4>
+          <div id="story-comment-lists" class="user-admin-comments">
+            <%= render partial: '/story_comments/comments', locals:{story_comments: @story_comments, admin_comment_page: @admin_comment_page} %>
+          </div>
+        </div>
+
+        <div class="content-box-foot">
+          <div id="comment-flash">
+            <%= render partial: '/layouts/flash', locals:{flash: flash} %>
+          </div>
+          <%= form_tag(admin_comments_path, method: :get, class: 'content-box-search-form-area') do %>
+            <div class="content-box-search-form">
+              <%= text_field_tag :search, '', class: 'content-box-search-form-textfield', placeholder:'キーワードを入力してください' %>
+              <%= button_tag(type: 'submit', class: 'content-box-search-form-btn') do %>
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

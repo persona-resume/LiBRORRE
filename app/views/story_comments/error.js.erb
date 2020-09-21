@@ -1,0 +1,5 @@
+$('#comment-flash').html("<%= j(render partial: '/layouts/flash', locals:{flash: flash}) %>");
+$(function(){
+  setTimeout(function(){
+  $('#flash').fadeOut()}, 5000)
+});

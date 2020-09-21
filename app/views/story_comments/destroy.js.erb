@@ -1,0 +1,6 @@
+$('#story-comment-lists').html("<%= j(render partial: '/story_comments/comments', locals:{story_comments: @story_comments}) %>");
+$('#comment-flash').html("<%= j(render partial: '/layouts/flash', locals:{flash: flash}) %>");
+$(function(){
+  setTimeout(function(){
+  $('#flash').fadeOut()}, 3000)
+});

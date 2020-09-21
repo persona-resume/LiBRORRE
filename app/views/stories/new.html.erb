@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div id="content-left" class="content-area col-md-12 col-xs-12">
+      <div class ="content-box">
+        <h2 class="content-box-head">ストーリーの追加</h2>
+        <%= form_for [@article, @story] do |f| %>
+          <div class="content-box-body">
+            <%= render '/layouts/validation_error', model: f.object %>
+            <h4><%= f.text_field :title, placeholder: "ストーリー名を入力", class:'title-field' %></h4>
+            <div class="tag-list">
+              タグ：
+                <ul id="story-tags">
+                </ul>
+                <%= hidden_field_tag :category_hidden,@category_list %>
+            </div>
+            <div>
+              <%= f.fields_for :story_topics do |topic| %>
+                <div>
+                  <%= render 'story_topic_fields', f: topic %>
+                </div>
+              <% end %>
+              <div>
+                <%= link_to_add_association '見出しの追加',f, :story_topics, class: 'btn btn-add' %>
+              </div>
+            </div>
+          </div>
+          <div class="content-box-foot">
+            <div>
+              <%= link_to "戻る", article_path(@article), class: "btn btn-half btn-sub2" %> <%= f.submit "保存", class: "btn btn-half btn-sub" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<% articles.each do |article| %>
+  <div class="content-list clearfix">
+    <h4><%= link_to article.title, article_path(article) %></h4>
+    <p><%= daytime_localize(article.updated_at) %></p>
+  </div>
+<% end %>
+

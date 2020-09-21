@@ -1,0 +1,14 @@
+<% stories.each do |story| %>
+  <div class="content-list clearfix">
+    <h4>
+      <% if story.user.admin == true %>
+        <%= link_to story.title, story_path(story) %> / <%= story.user.name %>
+      <% else %>
+        <%= link_to story.title, story_path(story) %> / <%= link_to story.user.name, user_path(story.user) %>
+      <% end %>
+      </h4>
+    <p id="library-count-<%= story.id %>">
+      <%= render partial: '/libraries/count', locals:{story: story} %>
+    </p>
+  </div>
+<% end %>

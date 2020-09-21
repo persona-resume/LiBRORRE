@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div id="content-left" class="content-area col-md-12 col-xs-12">
+      <div class ="content-box">
+        <h2 class="content-box-head">項目の追加</h2>
+        <%= form_for(@article) do |f| %>
+          <div class="content-box-body">
+            <%= render '/layouts/validation_error', model: f.object %>
+            <h4><%= f.text_field :title, placeholder: "エラー名を入力", class:'title-field' %></h4>
+            <div class="tag-list">
+              タグ：
+                <ul id="article-tags">
+                </ul>
+            </div>
+            <h4>- 意味</h4>
+            <%= f.text_area :mean, class:"body-textarea" %>
+            <h4>- 原因</h4>
+            <%= f.text_area :cause, class:"body-textarea" %>
+          </div>
+          <div class="content-box-foot">
+            <div>
+              <%= link_to "戻る", articles_path, class: "btn btn-half btn-sub2" %><%= f.submit "保存", class: "btn btn-half btn-sub" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+
+    <div id="content-left" class="content-area col-md-6 col-xs-12">
+      <div class ="content-box">
+        <h2 class="content-box-head">タグ：<%= @category.name %>を含むエラー記事</h2>
+        <div class="content-box-body">
+          <%= render '/articles/article_lists_wrapper', articles: @articles %>
+        </div>
+      </div>
+    </div>
+
+    <div id="content-right" class="content-area col-md-6 col-xs-12">
+      <div class ="content-box">
+        <h2 class ="content-box-head">タグ：<%= @category.name %>を含むストーリー</h2>
+        <div class="content-box-body">
+          <%= render '/stories/story_lists_wrapper', stories: @stories %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

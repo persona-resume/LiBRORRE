@@ -1,0 +1,16 @@
+<div class="nested-fields">
+  <div class="story-topic">
+    <h5 class="story-topic-title">
+      見出し：<%= f.text_field :title, placeholder:"見出しを入力" %>
+      <%= link_to_remove_association "見出しの削除", f, class: 'btn btn-remove' %>
+    </h5>
+    <div>
+      <%= f.fields :story_bodies do |body| %>
+        <%= render 'story_body_fields',f: body %>
+      <% end %>
+      <div class="story-body-area">
+        <%= link_to_add_association "本文・コードの追加", f, :story_bodies, class: 'btn btn-add' %>
+      </div>
+    </div>
+  </div>
+</div>

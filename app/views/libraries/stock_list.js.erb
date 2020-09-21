@@ -1,0 +1,3 @@
+$('#more-stocks').remove();
+$('#stocks').append("<%= j render partial: '/libraries/stock_list', locals:{libraries: @libraries} %>");
+$('#more-stock-link').append("<%= j link_to_next_page @libraries, 'さらに10件表示',params: { type: :stock }, remote: true, id: 'more-stocks' %>");

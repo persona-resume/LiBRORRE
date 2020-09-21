@@ -1,0 +1,40 @@
+<div class="container" >
+  <div class="row">
+    <div id="content-left" class="content-area col-md-6">
+      <div class ="content-box">
+        <h2 class="content-box-head">過去の記事：<%= @history.title %></h2>
+        <div class="content-box-body">
+          <h4>● 意味</h4>
+          <div>
+            <%= simple_format(@history.mean) %>
+          </div>
+          <h4>● 主な原因</h4>
+          <div>
+            <%= simple_format(@history.cause) %>
+          </div>
+        </div>
+        <div class="content-box-foot">
+          <div>
+            <%= link_to "この内容を現在の記事に反映", overwrite_article_path(@history), method: :patch, data: { confirm: '表示中の履歴を現在の記事に反映します。本当によろしいですか？' }, class: 'btn btn-half' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="content-right" class="content-area col-md-6">
+      <div class ="content-box">
+        <h2 class="content-box-head">現在の記事<%= @present_article.title %></h2>
+        <div class="content-box-body">
+          <h4>● 意味</h4>
+          <div>
+            <%= simple_format(@present_article.mean) %>
+          </div>
+          <h4>● 主な原因</h4>
+          <div>
+            <%= simple_format(@present_article.cause) %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

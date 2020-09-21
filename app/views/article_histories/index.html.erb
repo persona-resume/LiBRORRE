@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="content-area col-md-12">
+      <div class ="content-box">
+        <h2 class="content-box-head">編集履歴</h2>
+        <div class="content-box-body">
+          <p>元記事：<%= link_to @article.title, article_path(@article) %></p>
+          <table class="table">
+            <tr>
+              <th>編集日</th>
+              <th>編集ユーザー</th>
+            </tr>
+            <% @histories.each do |history| %>
+            <tr>
+              <td><%= link_to daytime_localize(history.created_at), article_history_path(history) %></td>
+              <td>
+                <% if history.user.admin == true %>
+                  <%= history.user.name %>
+                <% else %>
+                  <%= link_to history.user.name, user_path(history.user) %>
+                <% end %>
+              </td>
+            </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

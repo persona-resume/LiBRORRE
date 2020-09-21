@@ -1,0 +1,4 @@
+<%= form_for([parent, parent_comment], remote: true) do |f| %>
+  <%= f.text_area :comment, class:'foot-textarea' %>
+  <%= f.submit '送信', data: { "disable-with": "送信しています..." }, class:'btn btn-comment-submit', id: 'comment-submit' %>
+<% end %>

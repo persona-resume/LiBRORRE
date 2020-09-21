@@ -1,0 +1,31 @@
+<div class="container" >
+  <div class="row">
+     <div id="content-left" class="content-area col-md-12">
+      <div class ="content-box">
+        <h2 class="content-box-head"><%= @user.name %>が投稿したディスカッション/トーク</h2>
+        <div class="content-box-body col-md-6 col-xs-6">
+          <h4>- ディスカッション一覧</h4>
+          <div id="article-comment-lists" class="user-admin-comments">
+            <%= render partial: '/article_comments/comments', locals:{article_comments: @article_comments} %>
+          </div>
+        </div>
+
+        <div class="content-box-body col-md-6 col-xs-6">
+          <h4>- トーク一覧</h4>
+          <div id="story-comment-lists" class="user-admin-comments">
+            <%= render partial: '/story_comments/comments', locals:{story_comments: @story_comments} %>
+          </div>
+        </div>
+
+        <div class="content-box-foot">
+          <div id="comment-flash">
+            <%= render partial: '/layouts/flash', locals:{flash: flash} %>
+          </div>
+          <%= link_to(user_path(@user)) do %>
+          <span class="btn">利用者情報へ戻る</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+// Place all the styles related to the stories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.code{
+  border-radius: 5px;
+  background-color: #0B614B;
+  padding: 10px;
+  word-wrap: normal;
+  margin: 0 10px;
+}
+
+.story-header{
+  width: 100%;
+}
+
+.story-header > p{
+  float: left;
+}
+
+.story-edit-library{
+  float:right;
+}
+
+.story-topic-title{
+  font-weight: bold;
+  margin: 12px 0;
+}
+
+.story-body-area{
+  border-left: solid 6px #DEB580;
+  padding-left: 32px;
+}
+
+.story-body-area > p{
+  margin: 0;
+  padding: 10px 0;
+}
+
+.comment-user-thumb{
+  float: left;
+  margin: 6px;
+}
+
+.comment-user-text{
+  float: left;
+  width: 70%;
+}
+
+.comment-user-name{
+  font-weight: bold;
+}
+
+.story-list-user-thumb{
+  float: left;
+}
+
+@media screen and (max-width:991px){
+  .story-header{
+    margin-top: 10px;
+  }
+}

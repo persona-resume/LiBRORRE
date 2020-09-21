@@ -1,0 +1,22 @@
+<div class="container" >
+  <div class="row">
+   <div id="content-left" class="content-area col-md-6 col-xs-12">
+      <div class ="content-box">
+        <h2 class="content-box-head">保存済みのストーリー</h2>
+        <div class="content-box-body">
+          <%= render '/libraries/stock_lists_wrapper', libraries: @libraries %>
+        </div>
+      </div>
+    </div>
+
+    <div id="content-right" class="content-area col-md-6 col-xs-12">
+      <div class ="content-box">
+        <h2 class ="content-box-head">作成したストーリー</h2>
+        <div class="content-box-body story-lists">
+          <%= render '/stories/story_lists_wrapper', stories: @stories %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

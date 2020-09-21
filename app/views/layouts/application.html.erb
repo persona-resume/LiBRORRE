@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LiBRORRE</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+  <!-- フラッシュメッセージ -->
+    <div id="flash-messages">
+      <%= render partial: '/layouts/flash', locals:{flash: flash} %>
+    </div>
+
+    <header class="clearfix">
+      <%= link_to(root_path) do %>
+        <div class="header-logo">
+          <img class="header-logo-image" src="/images/logo.png">
+        </div>
+      <% end %>
+      <div class="header-search clearfix">
+        <%= form_tag(articles_path, method: :get, class: 'header-search-form-area') do %>
+          <div class="header-search-form">
+            <%= text_field_tag :search, '', class: 'header-search-form-textfield', placeholder:'キーワードを入力' %>
+            <%= button_tag(type: 'submit', class: 'header-search-form-btn') do %>
+              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <% if admin? %>
+      <div class="header-nav clearfix">
+        <div class="header-nav-list">
+          <%= link_to(users_path) do %>
+            <p class="header-nav-text">
+              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+              ユーザー一覧
+            </p>
+          <% end %>
+        </div>
+        <div class="header-nav-list">
+          <%= link_to(admin_comments_path) do %>
+            <p class="header-nav-text">
+              <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+              コメント検索
+            </p>
+          <% end %>
+        </div>
+        <div class="header-nav-list">
+          <%= link_to(destroy_user_session_path, method: :delete) do %>
+            <p class="header-nav-text">
+              <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+              ログアウト
+            </p>
+          <% end %>
+        </div>
+      </div>
+
+      <% elsif user_signed_in? %>
+
+      <div class="header-nav clearfix">
+        <div class="header-nav-list">
+          <%= link_to(about_path) do %>
+            <p class="header-nav-text">
+              <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+              使い方
+            </p>
+          <% end %>
+        </div>
+        <div class="header-nav-list">
+          <%= link_to(libraries_path) do %>
+            <p class="header-nav-text">
+              <span class="glyphicon glyphicon-book" aria-hidden="true"></span>ライブラリ
+            </p>
+          <% end %>
+        </div>
+        <div id="user-menu" class="header-nav-list">
+          <ul class="header-nav-text">
+            <li>
+              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+              <%= current_user.name %> ▼
+            </li>
+            <ul id="user-menu-topics">
+              <%= link_to(user_path(current_user)) do %>
+                <li>利用者情報</li>
+              <% end %>
+              <%= link_to(destroy_user_session_path, method: :delete) do %>
+                <li>ログアウト</li>
+              <% end %>
+            </ul>
+          </ul>
+        </div>
+      </div>
+
+      <% else %>
+
+      <div class="header-nav clearfix">
+        <div class="header-nav-list">
+          <%= link_to(about_path) do %>
+            <p class="header-nav-text">
+              <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+              使い方
+            </p>
+          <% end %>
+        </div>
+        <div class="header-nav-list">
+          <%= link_to(new_user_registration_path) do %>
+            <p class="header-nav-text">
+              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+              登録
+            </p>
+          <% end %>
+        </div>
+        <div class="header-nav-list">
+          <%= link_to(new_user_session_path) do %>
+            <p class="header-nav-text">
+              <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+              ログイン
+            </p>
+          <% end %>
+        </div>
+      </div>
+
+      <% end %>
+
+    </header>
+    <%= yield %>
+
+    <footer>
+      <div class="footer-search clearfix">
+        <%= form_tag(articles_path, method: :get, class: 'footer-search-form-area') do %>
+          <div class="footer-search-form">
+            <%= text_field_tag :search, '', class: 'footer-search-form-textfield', placeholder:'キーワードを入力' %>
+            <%= button_tag(type: 'submit', class: 'footer-search-form-btn') do %>
+              <span class="glyphicon glyphicon-search footer-search-form-icon" aria-hidden="true"></span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      ©️2019 Kazuki Kakuya
+    </footer>
+
+  </body>
+</html>
